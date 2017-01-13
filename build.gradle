@@ -1,0 +1,21 @@
+repositories {
+	jcenter()
+}
+
+apply plugin: "groovy"
+
+dependencies {
+    compile gradleApi()
+    compile 'com.android.tools.build:gradle:1.0.0'
+}
+
+archivesBaseName = "jenkinsBuildInfo"
+group = "pl.fzymek"
+version = "0.1.1"
+
+task updateJenkinsPlugin(type: Copy, dependsOn: build) {
+    description 'Updates jenkinsBuildInfo plugin in offline-jars directory after new plugin version is built.'
+    from "${buildDir}/libs/"
+    into '../offline-jars'
+    include "*.jar"
+}
